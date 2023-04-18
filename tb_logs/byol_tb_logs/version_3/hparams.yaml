@@ -1,0 +1,8 @@
+encoder_out_dim: 2048
+initial_tau: 0.996
+learning_rate: 0.2
+max_epochs: 1000
+projector_hidden_dim: 4096
+projector_out_dim: 256
+warmup_epochs: 10
+weight_decay: 1.5e-06
