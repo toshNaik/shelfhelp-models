@@ -45,7 +45,7 @@ I have included the summaries/key takeaways of some of the papers I read to [SUM
 <center>
 <figure>
 <img src="images/simclr_v1.png" width="500">
-<figcaption>SimCLR training loss version 1</figcaption>
+<b><figcaption>SimCLR training loss version 1</figcaption></b>
 </figure>
 </center>
 
@@ -55,7 +55,7 @@ Initially while training the SimCLR the loss seemed to be increasing and the out
 <center>
 <figure>
 <img src="images/simclr_v2.png" width="500">
-<figcaption>SimCLR training loss version 2</figcaption>
+<b><figcaption>SimCLR training loss version 2</figcaption></b>
 </figure>
 </center>
 
@@ -65,7 +65,7 @@ This is the training loss curve of SimCLR, after removing the LR scheduler. The 
 <center>
 <figure>
 <img src="images/byol_v1.png" width="500">
-<figcaption>BYOL training loss version 1</figcaption>
+<b><figcaption>BYOL training loss version 1</figcaption></b>
 </figure>
 </center>
 
@@ -75,7 +75,7 @@ Again the initial training loss curve was in presence of cosine annealing LR sch
 <center>
 <figure>
 <img src="images/byol_v2.png" width="500">
-<figcaption>BYOL training loss version 2</figcaption>
+<b><figcaption>BYOL training loss version 2</figcaption></b>
 </figure>
 </center>
 
@@ -85,16 +85,16 @@ This is the training loss curve of BYOL, after removing the LR scheduler.
 <center>
 <figure>
 <img src="images/classifier_v2.png" width="500">
-<figcaption>Classifier training loss</figcaption>
+<b><figcaption>Classifier training loss</figcaption></b>
 </figure>
-</center>j
+</center>
 This is the training loss curve of the classifier trained on Freiburg grocery dataset. 
 
 
 <center>
 <figure>
 <img src="images/classifier_v2_val.png" width="500">
-<figcaption>Classifier training loss</figcaption>
+<b><figcaption>Classifier validation loss</figcaption></b>
 </figure>
 </center>
 
