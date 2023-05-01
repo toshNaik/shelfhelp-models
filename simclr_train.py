@@ -34,7 +34,7 @@ contrast_transforms = transforms.Compose(
         # transforms.RandomGrayscale(p=0.2),
         transforms.GaussianBlur(kernel_size=21),
         transforms.ToTensor(),
-        transforms.Normalize((0.5,), (0.5,)),
+        # transforms.Normalize((0.5,), (0.5,)),
     ]
 )
 
@@ -87,14 +87,16 @@ print(len(final_image_path_list))
 print('$$$$$$$$$$$$$$$')
 
 if __name__ == '__main__':
-  # weight_path = 'https://pl-bolts-weights.s3.us-east-2.amazonaws.com/simclr/bolts_simclr_imagenet/simclr_imagenet.ckpt'
-  weight_path = '/home/ashutosh/simclr/tb_logs/simclr_tb_logs/version_8/checkpoints/epoch=96-step=8536.ckpt'
-  simclr = SimCLR.load_from_checkpoint(
-      weight_path,
-      strict=False,
-      optimizer='adam',
-      learning_rate = 1e-3
-  )
+  weight_path = 'https://pl-bolts-weights.s3.us-east-2.amazonaws.com/simclr/bolts_simclr_imagenet/simclr_imagenet.ckpt'
+  # weight_path = '/home/ashutosh/simclr/tb_logs/simclr_tb_logs/version_8/checkpoints/epoch=96-step=8536.ckpt'
+  weight_path = '/home/ashutosh/simclr/tb_logs/simclr_tb_logs/version_10/checkpoints/last.ckpt' 
+  # simclr = SimCLR.load_from_checkpoint(
+  #     weight_path,
+  #     strict=False,
+  #     optimizer='adam',
+  #     learning_rate = 1e-3
+  # )
+  simclr = SimCLR(arch='resnet50', strict=False, batch_size=128, gpus=1, num_samples=0, dataset='h')
   simclr.eval()
   lr_monitor = LearningRateMonitor(logging_interval="step")
   model_checkpoint = ModelCheckpoint(save_last=True, save_top_k=1, monitor="train_loss")
@@ -102,14 +104,13 @@ if __name__ == '__main__':
 
   tb_logger = TensorBoardLogger('tb_logs', name='simclr_tb_logs')
   trainer = pl.Trainer(
-      max_epochs = 200,
+      max_epochs = 30,
       accelerator = 'gpu',
       enable_checkpointing = True,
-      default_root_dir='weights/',
       logger=tb_logger,
       callbacks=callbacks,
   )
 
-  trainer.fit(simclr, train_dataloaders=training_loader) # val_dataloaders=val_loader)
+  trainer.fit(simclr, train_dataloaders=training_loader, val_dataloaders=val_loader)
   print(model_checkpoint.best_model_path)
   print(model_checkpoint.best_model_score)

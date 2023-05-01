@@ -95,13 +95,13 @@ if __name__ == '__main__':
 
   tb_logger = TensorBoardLogger('tb_logs', name='byol_tb_logs')
   trainer = pl.Trainer(
-      max_epochs = 500,
+      max_epochs = 700,
       accelerator = 'gpu',
       enable_checkpointing = True,
       logger=tb_logger,
       callbacks=callbacks,
   )
 
-  trainer.fit(byol, train_dataloaders=training_loader) # val_dataloaders=val_loader)
+  trainer.fit(byol, train_dataloaders=training_loader, val_dataloaders=val_loader)
   print(model_checkpoint.best_model_path)
   print(model_checkpoint.best_model_score)

@@ -4,3 +4,4 @@ __pycache__/
 test_tb.py
 classifier_api.py
 checkpoints/
+*.csv
