@@ -48,7 +48,9 @@ I have included the summaries/key takeaways of some of the papers I read to [SUM
 <figcaption>SimCLR training loss version 1</figcaption>
 </figure>
 </center>
+
 Initially while training the SimCLR the loss seemed to be increasing and the output was always 1 regardless of the input. This issue took quite a while to debug. The problem was caused because of the learning rate scheduler. The default code uses cosine annealing learning rate schedule. To fix it I just removed LR scheduler and it gave better results.
+
 
 <center>
 <figure>
@@ -56,7 +58,9 @@ Initially while training the SimCLR the loss seemed to be increasing and the out
 <figcaption>SimCLR training loss version 2</figcaption>
 </figure>
 </center>
+
 This is the training loss curve of SimCLR, after removing the LR scheduler. The loss decreases with epochs and the initial result also seems to be good.
+
 
 <center>
 <figure>
@@ -64,7 +68,9 @@ This is the training loss curve of SimCLR, after removing the LR scheduler. The 
 <figcaption>BYOL training loss version 1</figcaption>
 </figure>
 </center>
+
 Again the initial training loss curve was in presence of cosine annealing LR scheduler.
+
 
 <center>
 <figure>
@@ -72,15 +78,18 @@ Again the initial training loss curve was in presence of cosine annealing LR sch
 <figcaption>BYOL training loss version 2</figcaption>
 </figure>
 </center>
+
 This is the training loss curve of BYOL, after removing the LR scheduler. 
+
 
 <center>
 <figure>
 <img src="images/classifier_v2.png" width="500">
 <figcaption>Classifier training loss</figcaption>
 </figure>
-</center>
+</center>j
 This is the training loss curve of the classifier trained on Freiburg grocery dataset. 
+
 
 <center>
 <figure>
@@ -88,6 +97,7 @@ This is the training loss curve of the classifier trained on Freiburg grocery da
 <figcaption>Classifier training loss</figcaption>
 </figure>
 </center>
+
 Inspite of a good training loss curve the validation loss curve was not great. The best validation accuracy I obtained was 80%, there definitely is scope for improvement here. 
 
 ## Future work:
