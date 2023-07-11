@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import torch
-from pl_bolts.models.self_supervised import SimCLR
+from pl_bolts.models.self_supervised import SimCLR, SimSiam
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 
@@ -41,14 +41,15 @@ batch_ref = torch.from_numpy(batch_ref)
 # transforms.functional.normalize(images_aug, [0.5], [0.5], inplace=True)
 
 # pass the batch of augmented images to the model
-weight_path = '/home/ashutosh/simclr/tb_logs/simclr_tb_logs/version_8/checkpoints/epoch=96-step=8536.ckpt'
-simclr = SimCLR.load_from_checkpoint(weight_path)
-simclr.eval()
+weight_path = '/home/ashutosh/simclr/tb_logs/simsiam_tb_logs/version_1/checkpoints/epoch=77-step=13650.ckpt'
+# simclr = SimCLR.load_from_checkpoint(weight_path)
+# simclr.eval()
+simsiam = SimSiam.load_from_checkpoint(weight_path)
 with torch.no_grad():
-    feats = simclr(batch_aug)
-    z = simclr.projection(feats)
-    feats_ref = simclr(batch_ref)
-    z_ref = simclr.projection(feats_ref)
+    feats = simsiam(batch_aug)
+    # z = simclr.projection(feats)
+    feats_ref = simsiam(batch_ref)
+    # z_ref = simclr.projection(feats_ref)
 
 del batch_aug
 del batch_ref
@@ -73,10 +74,10 @@ feature_sim = multi_cosine_similarity(feats, feats_ref)
 print(feature_sim.shape)
 final = np.concatenate([row_labels.T, feature_sim], axis=1)
 final = np.concatenate([col_labels, final], axis=0)
-np.savetxt("simclr_features.csv", final, delimiter=',', fmt='%s')
+np.savetxt("simsiam_features.csv", final, delimiter=',', fmt='%s')
 
-z_sim = multi_cosine_similarity(z, z_ref)
-print(z_sim.shape)
-final = np.concatenate([row_labels.T, z_sim], axis=1)
-final = np.concatenate([col_labels, final], axis=0)
-np.savetxt("simclr_z.csv", final, delimiter=",", fmt='%s')
+# z_sim = multi_cosine_similarity(z, z_ref)
+# print(z_sim.shape)
+# final = np.concatenate([row_labels.T, z_sim], axis=1)
+# final = np.concatenate([col_labels, final], axis=0)
+# np.savetxt("simclr_z.csv", final, delimiter=",", fmt='%s')

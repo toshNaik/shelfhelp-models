@@ -1,0 +1,10 @@
+encoder_out_dim: 2048
+exclude_bn_bias: false
+learning_rate: 0.05
+max_epochs: 100
+momentum: 0.9
+predictor_hidden_dim: 512
+projector_hidden_dim: 2048
+projector_out_dim: 2048
+warmup_epochs: 10
+weight_decay: 0.0001
